@@ -15,10 +15,20 @@ export const addNumCommas = (value, round = -1, defaultValue = '') => {
   if (!valueSet(value)) {
     return defaultValue
   }
-  if (round !== -1) {
-    value = value.toFixed(round)
+
+  const num = Number(value)
+  if (Number.isNaN(num)) {
+    return defaultValue
   }
-  return new Intl.NumberFormat().format(value)
+
+  if (round !== -1) {
+    return new Intl.NumberFormat(undefined, {
+      minimumFractionDigits: round,
+      maximumFractionDigits: round,
+    }).format(num)
+  }
+
+  return new Intl.NumberFormat().format(num)
 }
 
 export const formatNum = (value, defaultValue = '') => {

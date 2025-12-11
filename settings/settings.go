@@ -167,7 +167,7 @@ func NewSettings(alternativeContext ...string) *Settings {
 		Block: BlockSettings{
 			MinedCacheMaxMB:                         getInt("blockMinedCacheMaxMB", 256, alternativeContext...),
 			PersisterStore:                          getURL("blockPersisterStore", "file://./data/blockstore", alternativeContext...),
-			StateFile:                               getString("blockPersister_stateFile", "file://./data/blockpersister_state.txt", alternativeContext...),
+			StateFile:                               getString("blockPersister_stateFile", "", alternativeContext...),
 			PersisterHTTPListenAddress:              getString("blockPersister_httpListenAddress", ":8083", alternativeContext...),
 			CheckDuplicateTransactionsConcurrency:   getInt("block_checkDuplicateTransactionsConcurrency", -1, alternativeContext...),
 			GetAndValidateSubtreesConcurrency:       getInt("block_getAndValidateSubtreesConcurrency", -1, alternativeContext...),
@@ -357,6 +357,7 @@ func NewSettings(alternativeContext ...string) *Settings {
 			DBTimeout:                         getDuration("utxostore_dbTimeoutDuration", 5*time.Second, alternativeContext...),
 			UseExternalTxCache:                getBool("utxostore_useExternalTxCache", true, alternativeContext...),
 			ExternalizeAllTransactions:        getBool("utxostore_externalizeAllTransactions", false, alternativeContext...),
+			ExternalStoreConcurrency:          getInt("utxostore_externalStoreConcurrency", 16, alternativeContext...),
 			PostgresMaxIdleConns:              getInt("utxostore_utxo_postgresMaxIdleConns", 10, alternativeContext...),
 			PostgresMaxOpenConns:              getInt("utxostore_utxo_postgresMaxOpenConns", 80, alternativeContext...),
 			VerboseDebug:                      getBool("utxostore_verbose_debug", false, alternativeContext...),
